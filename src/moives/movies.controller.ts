@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, Req, Res } from '@nestjs/common';
 import { query } from 'express';
 import { retry } from 'rxjs';
 import { Movie } from './entities/movie.entity';
@@ -11,7 +11,9 @@ export class MoviesController {
     constructor(private readonly moviesService:MoivesService){}
 
     @Get()
-    getAll() : Movie[]{
+    getAll(@Req() req, @Res() res) : Movie[]{
+        // @Req() req, @Res() res express에 접근 하는법
+        res.json();
         return this.moviesService.getAll();
     }
     @Get("search")
